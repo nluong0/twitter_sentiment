@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Twitter Sentiment Search -- {{title}}</title>
+    <style type="text/css">
+#searchForm {
+             margin-top: 2em;
+             border-top: dashed #aaa 1px;
+}
+.warning {
+            color: #f00;
+
+}
+    </style>
+</head>
+<body>
+    {% if result %}
+    <div id="result">
+        <h1>Here are the results for <b>{{form.searchTerm.data}}</b>!</h1>
+        <h2>Here's a quick summary of the tweets that mention candidates:</h2>
+        {% for line in result %}
+            <p>{{line}}</p>
+        {% endfor %}
+    </div>
+    <div id="result1">
+        <h2>Here's a quick summary of the tweets by followers of candidates:</h2>
+        {% for line in result1 %}
+            <p>{{line}}</p>
+        {% endfor %}
+    </div>
+    </div>
+    <div id="result2">
+        <h2>Here's a summary of the sentiment of candidate followers:</h2>
+        {% for line in result2 %}
+            <p>{{line}}</p>
+        {% endfor %}
+    </div>
+    <div id="result3">
+        <h2>Here's a summary of sentiment by mentions of particular candidates:</h2>
+        {% for line in result3 %}
+            <p>{{line}}</p>
+        {% endfor %}
+        <h3>These pie charts visualize the data above:</h3>
+        <p><img src="/visual/" alt="Pie Charts" align="middle"></p>
+    </div>
+    <div id="result4">
+        <h2>Here's a (possibly longer) summary of sentiment by both candidate mentions and candidate followers:</h2>
+        {% for line in result4 %}
+            <p>{{line}}</p>
+        {% endfor %}
+        <h2>Here's a word cloud of the 250 most frequently used words in the result:</h2>
+        <p><img src="/wordcloud/" alt="Word Cloud" align="middle"></p>
+    </div>
+    {% endif %}
+    <div id="searchForm">
+        <form action="" method="post" novalidate>
+            {{ form.hidden_tag() }}
+            {{form.searchTerm.label}}: {{form.searchTerm(size=15)}}
+            {% for error in form.searchTerm.errors %}
+                <span class="warning">[{{ error }}]</span>
+            {% endfor %}<br />
+            {{form.cityTerm.label}}: {{form.cityTerm(size=15)}}
+            {% for error in form.cityTerm.errors %}
+                <span class="warning">[{{ error }}]</span>
+            {% endfor %}<br />
+            {{form.stateTerm.label}}: {{form.stateTerm(size=15)}}
+            {% for error in form.stateTerm.errors %}
+                <span class="warning">[{{ error }}]</span>
+            {% endfor %}<br />
+            {{form.radiusVal.label}}: {{form.radiusVal(size=15)}}
+            {% for error in form.radiusVal.errors %}
+                <span class="warning">[{{ error }}]</span>
+            {% endfor %}<br />
+            <p>{{form.candidateTerm1.label}}: {{form.candidateTerm1}}
+            {{form.candidateAlias1.label}}: {{form.candidateAlias1}}</p>
+            <p>{{form.candidateTerm2.label}}: {{form.candidateTerm2}}
+            {{form.candidateAlias2.label}}: {{form.candidateAlias2}}</p>
+            <p>{{form.candidateTerm3.label}}: {{form.candidateTerm3}}
+            {{form.candidateAlias3.label}}: {{form.candidateAlias3}}</p>
+            <p>{{form.candidateTerm4.label}}: {{form.candidateTerm4}}
+            {{form.candidateAlias4.label}}: {{form.candidateAlias4}}</p>
+            <p>{{form.candidateTerm5.label}}: {{form.candidateTerm5}}
+            {{form.candidateAlias5.label}}: {{form.candidateAlias5}}</p>
+
+            <p>{{form.search()}}</p>
+            <p><b/>Load Historic Data<b> </p>
+            <p>{{form.CA_Super_Tues()}} </p>
+            <p>{{form.CA_Local()}} </p>
+            <p>{{form.March10()}} </p>
+        </form>
+    </div>
+</body>
+</html>
