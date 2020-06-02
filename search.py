@@ -1,14 +1,12 @@
-#import time
-#import datetime
 import pandas as pd
 import tweepy as tw
 from analyze import TweetData
 
-consumer_key = "H4Fwzo2sWBTW3DrWCkX0GvlLi"
-consumer_secret = "IIyP5LMbGqLrgsFS6Ljjx9y69K7w4x8Z29uXmNt7OYaAK2PSuv"
-access_token = "1225451977829691395-kCSE323X79bHRA1JRNk5o5SRhgMh2N"
-access_token_secret = "ztkDGiMMq1DymO6yEN863RzUCRihNW5DXSMdNBhd5OP2A"
-
+#Credentials related to twitter API have been censored 
+consumer_key = "key"
+consumer_secret = "secret"
+access_token = "access_token"
+access_token_secret = "access_token_secret"
 auth = tw.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)
 api = tw.API(auth, wait_on_rate_limit_notify=True)
@@ -97,27 +95,3 @@ def search_tweets(search_word, loc, tweets_to_pull=150, result_type='recent',
     tweets_df.to_csv('test_data.csv')
 
     return TweetData(tweets_df, search_params)
-
-
-    '''
-    Alt Idea
-    - Allow user to input an entity (news outlet, public figure, local gov officials, state)
-    - Check to see if that entity has a twitter account
-    - Pull all tweets from that account's timeline (potentially with a keyword --would be in
-      analyze.py with work through strings instead of with twitter api in this .py file)
-    - Analyze those tweets 
-
-    Could answer questions similar to ones below.
-        - What does the NYT or WashPo tweets about the most?
-        - What is a mayor's most successful tweet?
-        - Which states are tweeting about a certain event most positively/most negatively?
-
-    data = []
-    name = "nytimes"
-    num_tweets = 150
-    results = api.user_timeline(id=name, count=num_tweets)
-    For tweet in results:
-        data.append(tweet.text)
-    df = pd.DataFrame(data, columns=['tweet_text'])
-    '''
-    
